@@ -3,7 +3,6 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-var Migrate = require("./migrations/ecommerce-add-product");
 
 
 var app = express();
@@ -28,13 +27,17 @@ app.use(express.static(__dirname + '/public'));
 //ENDPOINTS
 app.get("/customer", CustomerCtrlr.get);
 app.post("/customer", CustomerCtrlr.post);
-// app.delete("/customer", CustomerCtrlr.delete);
+app.put("/customer", CustomerCtrlr.put);
+app.put("/customer/push", CustomerCtrlr.push);
+app.delete("/customer", CustomerCtrlr.delete);
 
-// app.get("/customers", CustomerCtrlr.getCustomers);
-// app.post("/customers", CustomerCtrlr.postCustomers);
+app.get("/customers", CustomerCtrlr.getCustomers);
 
 // app.get("/customer/order", OrderCtrlr.getOrder);
 // app.post("/customer/order", OrderCtrlr.postOrder);
+
+app.get('/products', ProductCtrlr.getAll);
+app.post('/products', ProductCtrlr.post);
 
 
 //CONNECTIONS
